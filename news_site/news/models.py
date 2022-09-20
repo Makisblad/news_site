@@ -19,6 +19,10 @@ class News(models.Model):
         verbose_name_plural = 'Новости'
         ordering = ['-created_at', 'title']
 
+    def get_absolute_url(self):
+        return reverse('view_news', kwargs={'news_id': self.pk})
+
+
 class Category(models.Model):
     title = models.CharField(max_length=150, db_index=True, verbose_name='Категория')# db_index - устанавливает индекс для удобного поиска
     def __str__(self):
@@ -28,3 +32,5 @@ class Category(models.Model):
         verbose_name = 'Категория'
         verbose_name_plural = 'Категории'
         ordering = ['title']
+    def get_absolute_url(self):
+        return reverse('category', kwargs={'categories_id': self.pk})
