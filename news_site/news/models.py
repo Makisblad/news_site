@@ -9,7 +9,7 @@ class News(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/', verbose_name='Фото', blank=True)
     is_published = models.BooleanField(default=True, verbose_name='Опубликована')
-    categories = models.ForeignKey('Category', on_delete=models.PROTECT, null=True, verbose_name='Категория')# null=True для того, чтобы что-то было указано для уже заведенных записей
+    categories = models.ForeignKey('Category', on_delete=models.PROTECT,verbose_name='Категория')# null=True для того, чтобы что-то было указано для уже заведенных записей
 
     def __str__(self):
         return self.title
@@ -20,7 +20,7 @@ class News(models.Model):
         ordering = ['-created_at', 'title']
 
     def get_absolute_url(self):
-        return reverse('view_news', kwargs={'news_id': self.pk})
+        return reverse('view_news', kwargs={'pk': self.pk})
 
 
 class Category(models.Model):
