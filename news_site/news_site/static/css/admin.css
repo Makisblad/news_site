@@ -1,0 +1,17 @@
+#header,.module h2, .module caption, .inline-group h2{
+    background: #90a4ae;
+}
+#branding h1 a:link, #branding h1 a:visited{
+    color: #fff;
+}
+#user-tools, #logout-form button {
+    color: #fff;
+}
+
+div.breadcrumbs {
+    background: #263238;
+}
+
+#nav-sidebar .current-app .section:link, #nav-sidebar .current-app .section:visited {
+    color: #263238;
+}

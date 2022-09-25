@@ -16,7 +16,7 @@ class HomeNews(ListView):
         return context
 
     def get_queryset(self):
-        return News.objects.filter(is_published=True)
+        return News.objects.filter(is_published=True).select_related('categories')# для жадной загрузки и скоращения sql-запросов
 
 class NewsByCategory(ListView):
     model = News
@@ -25,7 +25,7 @@ class NewsByCategory(ListView):
     allow_empty = False # запрет показа пустых списков
 
     def get_queryset(self):
-        return News.objects.filter(categories_id=self.kwargs['categories_id'])
+        return News.objects.filter(categories_id=self.kwargs['categories_id']).select_related('categories')# для жадной загрузки и скоращения sql-запросов
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
