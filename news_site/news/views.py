@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404,redirect
 from .models import *
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class HomeNews(ListView):
@@ -56,9 +57,10 @@ class ViewNews(DetailView):
     template_name = 'news/view_news.html'
     context_object_name = 'news'
 
-class AddNews(CreateView):
+class AddNews(LoginRequiredMixin,CreateView):
     form_class = NewsForm
     template_name = 'news/add_news.html'
+    login_url = '/admin/'
 
 
 # def add_news(request):
