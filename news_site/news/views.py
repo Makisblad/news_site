@@ -5,6 +5,8 @@ from .forms import *
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
+from django.contrib import messages
+
 
 
 class HomeNews(ListView):
@@ -26,6 +28,7 @@ class NewsByCategory(ListView):
     template_name = 'news/category.html'
     context_object_name = 'news'
     allow_empty = False # запрет показа пустых списков
+    paginate_by = 2
 
     def get_queryset(self):
         return News.objects.filter(categories_id=self.kwargs['categories_id']).select_related('categories')# для жадной загрузки и скоращения sql-запросов
@@ -63,6 +66,23 @@ class AddNews(LoginRequiredMixin,CreateView):
     form_class = NewsForm
     template_name = 'news/add_news.html'
     login_url = '/admin/'
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Вы успешно зарегистрировались')
+            return redirect('login')
+        else:
+            messages.error(request, 'Ошибка регистрации')
+    else:
+        form = UserRegisterForm()
+    return render(request, "news/register.html", {'form': form})
+
+
+def login(request):
+    return render(request, "news/login.html")
 
 
 # def add_news(request):

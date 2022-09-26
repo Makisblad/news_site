@@ -1,10 +1,9 @@
-<div class="list-group list-group">
+<div class="list-group">
     {% for item in categories %}
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-            <div class="fw-bold" href="{{ item.get_absolute_url}}" class="list-group-item list-group-item-action">{{ item.title }}</div>
-        </div>
-        <span class="badge bg-primary rounded-pill">{{ item.cnt }}</span>
-    </li>
+        <ul class="list-group">
+          <a href="{{ item.get_absolute_url}}" class="list-group-item d-flex justify-content-between align-items-center">
+              {{item.title}}
+            <span class="badge bg-primary rounded-pill">{{ item.cnt }}</span>
+          </a>
     {% endfor %}
 </div>
