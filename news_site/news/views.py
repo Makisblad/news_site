@@ -4,12 +4,14 @@ from .models import *
 from .forms import *
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.paginator import Paginator
 
 
 class HomeNews(ListView):
     model = News
     template_name = 'news/index.html'
     context_object_name = 'news'
+    paginate_by = 2
     #extra_context = {'title':'Список новостей'}
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
