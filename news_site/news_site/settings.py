@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "ckeditor",
     "ckeditor_uploader",
+    "testapp.apps.TestappConfig",
+    "mptt",
 ]
 
 MIDDLEWARE = [
@@ -206,3 +208,12 @@ CKEDITOR_CONFIGS = {
         ]),
     }
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
+    }
+}
+
+MPTT_ADMIN_LEVEL_INDENT = 20
